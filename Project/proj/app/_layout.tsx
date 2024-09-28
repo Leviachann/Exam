@@ -11,8 +11,7 @@ export default function RootLayout() {
         headerShown: false, 
       }}>
       <Stack.Screen name="index" />
-      <Stack.Screen name="Product" />
-      <Stack.Screen name='(tabs)' />
+
     </Stack>
   );
 }

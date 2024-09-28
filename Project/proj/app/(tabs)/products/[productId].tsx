@@ -1,36 +1,43 @@
 import { StyleSheet, View, Text, ImageBackground, TouchableOpacity } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { useRouter } from 'expo-router'; 
+import { useLocalSearchParams, useRouter } from 'expo-router'; 
 import BigTitle from '@/components/UI/BigTitle';
 import Description from '@/components/UI/Description';
 import GreenButton from '@/components/UI/GreenButton';
 import AntDesign from '@expo/vector-icons/AntDesign';
 
-const imageUrl = 'https://s3-alpha-sig.figma.com/img/ed02/3feb/39e754db430384ee1a2a937245b5be42?Expires=1728259200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=DrU3gRXh-OJMhGiuyvH73AIiuZqlqoZrILpiwsThH8MxToKHFnNmYsuPaNgJUNSbIVwmK4oyFZn72F-DyRsUePVauyWchxRXVunvhRDbZUDoF6cMInnN-7SA~wGaWSodpbFnt6KVFGurM5DWNt9GrZsRg~nK~M089DXI6enNZrx~Dqi8BeQgnF5uogy-d5UE1H~ybbxD~4VczeX01gE5HEsqhVmbsBWzDQAmPiqG3Fx-gsNlu5H2WJKxA6KCQFxTMFF0CZyXqVrlzeXM9x5yC4yLxL55vDpQzIBlUf1AMVpfWe5nrjHEBijPHdUJ1-cv8qHGig1Fwriu51r0IjKzcw__';
-
 export default function Product() {
-  const router = useRouter(); 
-  const handleOrderNow = () => {
-    router.push('/(tabs)');
-  };
-  
+  const params = useLocalSearchParams();
+
+  const name = Array.isArray(params.name) ? params.name[0] : params.name;
+  const img = Array.isArray(params.img) ? params.img[0] : params.img;
+  const price = Array.isArray(params.price) ? params.price[0] : params.price;
+  const weight = Array.isArray(params.weight) ? params.weight[0] : params.weight;
+  const country = Array.isArray(params.country) ? params.country[0] : params.country;
+  const description = Array.isArray(params.description) ? params.description[0] : params.description;
+
+  console.log(name, "name"); 
+
   return (
-    <ImageBackground source={{ uri: imageUrl }} style={styles.safeArea}>
+    <ImageBackground 
+      source={{ uri: img }} 
+      style={styles.safeArea} 
+      resizeMode="cover" 
+    >
       <View style={styles.drawer}>
-        <BigTitle title="Boston Lettuce" style={styles.title} />
+        <BigTitle title={name} style={styles.title} />
         <View style={styles.row}>
-          <Text style={styles.count}>1.10</Text>
+          <Text style={styles.count}>{price}</Text>
           <Text style={styles.price}>€ / piece</Text>
         </View>
-        <Text style={styles.portion}>~ 150 gr / piece</Text>
-        <Text style={styles.country}>Spain</Text>
-        <Description style={styles.description} content='Lettuce is an annual plant of the daisy family, Asteraceae. It is most often grown as a leaf vegetable, but sometimes for its stem and seeds. Lettuce is most often used for salads, although it is also seen in other kinds of food, such as soups, sandwiches and wraps; it can also be grilled.' />
+        <Text style={styles.portion}>{weight}/ piece</Text>
+        <Text style={styles.country}>{country}</Text>
+        <Description style={styles.description} content={description} />
         <View>
           <TouchableOpacity style={styles.container}>
             <AntDesign name="hearto" size={24} color="#9586A8" />
           </TouchableOpacity>
         </View>
-        <GreenButton title='Add To Cart' onPress={handleOrderNow} />
+        <GreenButton title='Add To Cart' onPress={() => {}} />
       </View>
     </ImageBackground>
   );
@@ -69,13 +76,6 @@ const styles = StyleSheet.create({
   description: {
     marginTop: 18,
     paddingBottom: 40,
-  },
-  dismissText: {
-    color: '#9586A8',
-    fontWeight: '600',
-    fontSize: 15,
-    textAlign: 'center',
-    marginVertical: 30,
   },
   row: {
     flexDirection: 'row',

@@ -5,13 +5,14 @@ import { useRouter } from 'expo-router';
 
 const CategoryList = ({ searchQuery }: any) => {
   const router = useRouter();
+
   const filteredData = mockData.filter(item =>
     item.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const handleCategoryClick = (category: any) => {
     console.log('Category clicked:', category);
-    router.push(`/CategoryResults`);
+    router.push(`/products/category/${category.id}`); 
   };
 
   return (

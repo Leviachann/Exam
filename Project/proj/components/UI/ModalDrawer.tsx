@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 20,
     paddingVertical: 20,
     paddingHorizontal: 20,
-    height: 300, // Adjust height as needed
+    height: 300, 
   },
 });
 

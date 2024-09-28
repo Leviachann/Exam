@@ -32,7 +32,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="ShoppingCart"
         options={{
-          title: 'Checkout', 
+          title: '', 
                    
           headerLeft: () => (
             <TouchableOpacity onPress={() => {{
@@ -50,12 +50,49 @@ export default function TabLayout() {
       <Tabs.Screen
         name="Profile"
         options={{
-          title: '',
+          title: '',headerLeft: () => (
+            <TouchableOpacity onPress={() => {{
+              router.push('../');}}}>
+              <Text style={{color:'#2D0C57', margin:18}}>
+              <AntDesign name="left" size={24} color="#2D0C57" />
+              </Text>
+            </TouchableOpacity>
+          ),
           tabBarIcon: ({ color, focused }) => (
             <UserIcon></UserIcon>
           ),
         }}
     />
+          <Tabs.Screen
+        name="products/[productId]"
+        options={{
+          title: '',          
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => {{
+              router.push('../');}}}>
+              <Text style={{color:'#2D0C57', margin:18}}>
+              <AntDesign name="left" size={24} color="#2D0C57" />
+              </Text>
+            </TouchableOpacity>
+          ),
+          tabBarButton: () => null,
+        }}
+      />
+                <Tabs.Screen
+        name="products/category/[categoryId]"
+        options={{
+          title: '',          
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => {{
+              router.push('../');}}}>
+              <Text style={{color:'#2D0C57', margin:18}}>
+              <AntDesign name="left" size={24} color="#2D0C57" />
+              </Text>
+            </TouchableOpacity>
+          ),
+          tabBarButton: () => null,
+        }}
+      />
     </Tabs>
   );
 }
